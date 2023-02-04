@@ -1,11 +1,10 @@
+
 import 'package:elmokhtaser/config/app_routes/app_routes.dart';
-import 'package:sizer/sizer.dart';
 import 'package:elmokhtaser/core/components/animated_page.dart';
 import 'package:elmokhtaser/core/utils/app_ui.dart';
-import 'package:elmokhtaser/core/utils/app_util.dart';
 import 'package:elmokhtaser/core/utils/constants.dart';
 import 'package:flutter/material.dart';
-
+import 'package:sizer/sizer.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -21,9 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
           milliseconds: 2000,
         ), () async {
       if (Constants.token.isNotEmpty || Constants.token != '') {
-        // await CartCubit.get(context).getAllCartItems(context);
-        // await NotificationCubit.get(context).getUserNotification(context);
-        Navigator.pushReplacementNamed(context, Routes.layout);
+        // Navigator.pushReplacementNamed(context, Routes.layout);
       } else {
         Navigator.pushReplacementNamed(context, Routes.onBoarding);
       }
@@ -33,10 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CartCubit, CartState>(
-      listener: (context, state) {
-      },
-      builder: (context, state) {
+    
         return Scaffold(
           body: Container(
             decoration: BoxDecoration(
@@ -64,19 +58,12 @@ class _SplashScreenState extends State<SplashScreen> {
                       SizedBox(
                         height: 7.h,
                       ),
-                       BuildCondition(
-                        condition: state is GetAllCartLoadingState||state is GetUserNotificationLoadingState,
-                        fallback: (context)=>Container(),
-                        builder: (context) {
-                          return AppUtil.appLoader(height: 14.h);
-                        }
-                      ),
+                     
                     ],
                   ),
                 ),
           ),
         );
-      },
-    );
+      
   }
 }

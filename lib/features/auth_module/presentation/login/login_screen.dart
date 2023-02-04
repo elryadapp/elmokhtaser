@@ -1,15 +1,21 @@
+import 'package:elmokhtaser/config/app_routes/app_routes.dart';
+import 'package:elmokhtaser/core/components/animated_page.dart';
+import 'package:elmokhtaser/core/components/app_btn.dart';
+import 'package:elmokhtaser/core/components/app_text.dart';
+import 'package:elmokhtaser/core/components/app_text_form.dart';
+import 'package:elmokhtaser/core/utils/app_ui.dart';
+import 'package:elmokhtaser/core/utils/icon_broken.dart';
+import 'package:elmokhtaser/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
-import 'package:elmoktaser_elshamel/modules/auth/_exports.dart';
+import 'package:sizer/sizer.dart';
+import 'package:easy_localization/easy_localization.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        var authCubit = AuthCubit.get(context);
-        return Scaffold(
+
+    return  Scaffold(
           backgroundColor: AppUi.colors.whiteColor,
           body: Form(
             key: authCubit.loginFormKey,
@@ -25,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppText(
-                        'Login'.tr(),
+                      LocaleKeys.Login.tr() ,
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
                       ),
@@ -151,7 +157,6 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
         );
-      },
-    );
+     
   }
 }

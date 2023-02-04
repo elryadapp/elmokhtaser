@@ -1,13 +1,16 @@
-
+import 'package:easy_localization/easy_localization.dart';
+import 'package:elmokhtaser/core/components/app_btn.dart';
+import 'package:elmokhtaser/core/components/app_text.dart';
+import 'package:elmokhtaser/core/components/app_text_form.dart';
+import 'package:elmokhtaser/core/utils/app_ui.dart';
+import 'package:elmokhtaser/core/utils/app_util.dart';
 import 'package:flutter/material.dart';
-import 'package:elmoktaser_elshamel/modules/auth/_exports.dart';
-
+import 'package:sizer/sizer.dart';
 class VerificationScreen extends StatelessWidget {
   const VerificationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var authCubit = AuthCubit.get(context);
     return Scaffold(
         body: Padding(
       padding: EdgeInsets.symmetric(

@@ -38,9 +38,9 @@ dependencies:
   pdf: ^3.8.1
   path_provider: ^2.0.11
   screenshot: ^1.2.3
-  firebase_core: ^1.18.0
+  firebase_core: ^2.4.1
   printing: ^5.9.1
-  firebase_messaging: ^11.4.2
+  firebase_messaging: ^14.2.1
   flutter_local_notifications: ^9.5.3
   flutter_downloader: ^1.7.4
   permission_handler: ^10.0.0

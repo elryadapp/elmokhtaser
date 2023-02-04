@@ -1,10 +1,11 @@
+import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:elmokhtaser/core/components/bloc_observer.dart';
 import 'package:elmokhtaser/core/network/local/cache_helper.dart';
 import 'package:elmokhtaser/core/network/remote/dio_helper.dart';
 import 'package:elmokhtaser/core/network/remote/notification_helper.dart';
 import 'package:elmokhtaser/core/utils/constants.dart';
 import 'package:elmokhtaser/elmokhtaser_root/elmokhtaser_root.dart';
-import 'package:elmokhtaser/features/auth_module/_exports.dart';
 import 'package:elmokhtaser/firebase_options.dart';
 import 'package:elmokhtaser/generated/codegen_loader.g.dart';
 import 'package:flutter/material.dart';

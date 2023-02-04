@@ -1,17 +1,18 @@
 
+import 'package:elmokhtaser/core/components/app_btn.dart';
+import 'package:elmokhtaser/core/components/app_text.dart';
+import 'package:elmokhtaser/core/components/app_text_form.dart';
+import 'package:elmokhtaser/core/utils/app_ui.dart';
+import 'package:elmokhtaser/core/utils/icon_broken.dart';
 import 'package:flutter/material.dart';
-import 'package:elmoktaser_elshamel/modules/auth/_exports.dart';
-
-
+import 'package:easy_localization/easy_localization.dart';
+import 'package:sizer/sizer.dart';
 class BasicInfoScreen extends StatelessWidget {
   const BasicInfoScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        var authCubit = AuthCubit.get(context);
+
         return Form(
           key: authCubit.registerBasicInfoFormKey,
           child: Column(
@@ -177,7 +178,6 @@ class BasicInfoScreen extends StatelessWidget {
             ],
           ),
         );
-      },
-    );
+      
   }
 }
