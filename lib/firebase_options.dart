@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '792118650082',
     projectId: 'elmoktaser',
     storageBucket: 'elmoktaser.appspot.com',
-    iosClientId: '792118650082-aq6qhping9pg2nacg0m58iushvliqmvt.apps.googleusercontent.com',
-    iosBundleId: 'com.example.elmoktaserElshamel',
+    iosClientId:
+        '792118650082-aq6qhping9pg2nacg0m58iushvliqmvt.apps.googleusercontent.com',
+    iosBundleId: 'com.elrayd.elmoktaserElshamel',
   );
 }

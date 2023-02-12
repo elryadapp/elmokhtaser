@@ -43,7 +43,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.elryad.elmoktaser"
+        applicationId "com.elryad.elmoktaserElshamel"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()

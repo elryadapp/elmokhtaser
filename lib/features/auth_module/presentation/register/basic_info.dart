@@ -1,18 +1,22 @@
-
 import 'package:elmokhtaser/core/components/app_btn.dart';
 import 'package:elmokhtaser/core/components/app_text.dart';
 import 'package:elmokhtaser/core/components/app_text_form.dart';
 import 'package:elmokhtaser/core/utils/app_ui.dart';
 import 'package:elmokhtaser/core/utils/icon_broken.dart';
+import 'package:elmokhtaser/features/auth_module/auth_cubit/auth_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+
 class BasicInfoScreen extends StatelessWidget {
   const BasicInfoScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
+    return BlocBuilder<AuthCubit, AuthState>(
+      builder: (context, state) {
+        var authCubit = AuthCubit.get(context);
         return Form(
           key: authCubit.registerBasicInfoFormKey,
           child: Column(
@@ -46,7 +50,6 @@ class BasicInfoScreen extends StatelessWidget {
                 filledColor: AppUi.colors.bgColor,
                 isFilled: true,
                 hint: 'example@gmail.com',
-               
                 textInputType: TextInputType.emailAddress,
                 controller: authCubit.registerEmailController,
                 prefixIcon: Icon(
@@ -69,12 +72,11 @@ class BasicInfoScreen extends StatelessWidget {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'this_field_is_required'.tr();
-                    } else if (value.length < 9||value.length > 9) {
+                    } else if (value.length < 9 || value.length > 9) {
                       return 'phone_error_msg'.tr();
                     }
                     return null;
                   },
-                  
                   controller: authCubit.registerPhoneNumberController,
                   textInputType: TextInputType.phone,
                   prefixIcon: Padding(
@@ -104,15 +106,14 @@ class BasicInfoScreen extends StatelessWidget {
                 filledColor: AppUi.colors.bgColor,
                 isFilled: true,
                 hint: 'Password'.tr(),
-
-                    validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'this_field_is_required'.tr();
-                    } else if (value.length < 8) {
-                      return 'password_length_error_msg'.tr();
-                    }
-                    return null;
-                  },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'this_field_is_required'.tr();
+                  } else if (value.length < 8) {
+                    return 'password_length_error_msg'.tr();
+                  }
+                  return null;
+                },
                 suffixIcon: InkWell(
                   onTap: () {
                     authCubit.registerChangeVisibilityp();
@@ -142,10 +143,9 @@ class BasicInfoScreen extends StatelessWidget {
                   } else if (value !=
                       authCubit.registerPasswordController.text) {
                     return 'password_error_msg'.tr();
+                  } else if (value.length < 8) {
+                    return 'password_length_error_msg'.tr();
                   }
-                  else if (value.length < 8) {
-                      return 'password_length_error_msg'.tr();
-                    }
                   return null;
                 },
                 suffixIcon: InkWell(
@@ -154,7 +154,7 @@ class BasicInfoScreen extends StatelessWidget {
                   },
                   child: Icon(authCubit.registerVisibilityIcon),
                 ),
-                obscureText: authCubit.registerVisibility,
+                obscureText: state.registerVisibilityChangeState,
                 hint: 'password_confiremation'.tr(),
                 controller: authCubit.registerPasswordConfirmController,
                 prefixIcon: Icon(
@@ -178,6 +178,7 @@ class BasicInfoScreen extends StatelessWidget {
             ],
           ),
         );
-      
+      },
+    );
   }
 }

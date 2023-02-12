@@ -3,21 +3,29 @@ import 'package:elmokhtaser/core/components/animated_page.dart';
 import 'package:elmokhtaser/core/components/app_btn.dart';
 import 'package:elmokhtaser/core/components/app_text.dart';
 import 'package:elmokhtaser/core/components/app_text_form.dart';
+import 'package:elmokhtaser/core/providers/elmokhtaser_cubit/elmokhtaser_cubit.dart';
 import 'package:elmokhtaser/core/utils/app_ui.dart';
+import 'package:elmokhtaser/core/utils/app_util.dart';
+import 'package:elmokhtaser/core/utils/constants.dart';
 import 'package:elmokhtaser/core/utils/icon_broken.dart';
+import 'package:elmokhtaser/features/auth_module/auth_cubit/auth_cubit.dart';
 import 'package:elmokhtaser/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:easy_localization/easy_localization.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    return  Scaffold(
-          backgroundColor: AppUi.colors.whiteColor,
-          body: Form(
+    return Scaffold(
+      backgroundColor: AppUi.colors.whiteColor,
+      body: BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          var authCubit = AuthCubit.get(context);
+          return Form(
             key: authCubit.loginFormKey,
             child: AppSlideAnimation(
               child: SingleChildScrollView(
@@ -31,12 +39,28 @@ class LoginScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppText(
-                      LocaleKeys.Login.tr() ,
+                        LocaleKeys.Login.tr(),
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w600,
                       ),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      if (ElmokhtaserCubit.get(context)
+                              .state
+                              .elmokhtaserImageModel !=
+                          null)
+                        AppUtil.appCachedImage(
+                            height: 20.h,
+                            width: Constants.getwidth(context),
+                            imgUrl: AppUi.assets.networkImageBaseLink +
+                                ElmokhtaserCubit.get(context)
+                                    .state
+                                    .elmokhtaserImageModel!
+                                    .data!
+                                    .imageLogin!),
                       Padding(
-                        padding: EdgeInsets.only(bottom: 1.5.h, top: 5.h),
+                        padding: EdgeInsets.only(bottom: 1.5.h, top: 2.h),
                         child: AppText(
                           'E-mail'.tr(),
                         ),
@@ -77,7 +101,7 @@ class LoginScreen extends StatelessWidget {
                           },
                           child: Icon(authCubit.loginVisibilityIcon),
                         ),
-                        obscureText: authCubit.loginVisibality,
+                        obscureText: !state.loginVisibilityChangeState,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(vertical: 3.h),
@@ -90,23 +114,20 @@ class LoginScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      BuildCondition(
-                          condition: state is LoginLoadingState,
-                          builder: (context) => AppUtil.appLoader(height: 14.h),
-                          fallback: (context) {
-                            return AppButton(
-                              title: 'Login'.tr(),
-                              onTap: () {
-                                if (authCubit.loginFormKey.currentState!
-                                    .validate()) {
-                                  authCubit.authLogin(context);
-                                } else {
-                                  AppUtil.flushbarNotification(
-                                      'info_alert'.tr());
-                                }
-                              },
-                            );
-                          }),
+                      if (state.loginStates == LoginStates.loading)
+                        AppUtil.appLoader(height: 14.h)
+                      else
+                        AppButton(
+                          title: 'Login'.tr(),
+                          onTap: () {
+                            if (authCubit.loginFormKey.currentState!
+                                .validate()) {
+                              authCubit.authLogin(context);
+                            } else {
+                              AppUtil.flushbarNotification('info_alert'.tr());
+                            }
+                          },
+                        ),
                       SizedBox(
                         height: 2.h,
                       ),
@@ -140,7 +161,8 @@ class LoginScreen extends StatelessWidget {
                       Center(
                         child: InkWell(
                           onTap: () {
-                            Navigator.pushReplacementNamed(context, Routes.layout);
+                            Navigator.pushReplacementNamed(
+                                context, Routes.layout);
                           },
                           child: AppText('visitor_login'.tr(),
                               fontSize: 14.sp,
@@ -155,8 +177,9 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        );
-     
+          );
+        },
+      ),
+    );
   }
 }

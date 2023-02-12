@@ -16,11 +16,14 @@ class AppUtil {
         alignment: Alignment.center,
         child: Lottie.asset(AppUi.assets.loadingLottie, height: height ?? 18.h),
       );
-  static Widget emptyLottie({height,padding}) => Align(
+  static Widget emptyLottie({height, padding}) => Align(
         alignment: Alignment.topCenter,
         child: Padding(
-          padding: EdgeInsets.only(top:padding?? 12.h),
-          child: Lottie.asset(AppUi.assets.empty, height: height ?? 30.h,),
+          padding: EdgeInsets.only(top: padding ?? 12.h),
+          child: Lottie.asset(
+            AppUi.assets.empty,
+            height: height ?? 30.h,
+          ),
         ),
       );
 
@@ -41,19 +44,18 @@ class AppUtil {
     ).show();
   }
 
-  static appCachedImage({imgUrl,width,height}) {
+  static appCachedImage({imgUrl, width, height}) {
     return CachedNetworkImage(
       imageUrl: imgUrl,
       imageBuilder: (context, imageProvider) => ClipRRect(
-                                borderRadius: BorderRadius.circular(5),
-
+        borderRadius: BorderRadius.circular(5),
         child: Container(
           height: height,
           width: width,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: imageProvider,
-            
+              alignment: Alignment.topCenter,
               fit: BoxFit.cover,
             ),
           ),

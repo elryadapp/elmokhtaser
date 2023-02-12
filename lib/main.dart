@@ -21,23 +21,20 @@ Future<void> main() async {
   await EasyLocalization.ensureInitialized();
   await CacheHelper.init();
   await DioHelper.init();
-  await NotificationHelper.init();
-  await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
+  // await NotificationHelper.init();
+  // await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
 
-   Bloc.observer = MyBlocObserver();
+  Bloc.observer = MyBlocObserver();
 
-    runApp(
-     EasyLocalization(
+  runApp(EasyLocalization(
       supportedLocales: const [
         Locale('en'),
         Locale('ar'),
       ],
       path: 'assets/translations',
-      startLocale:  Locale(Constants.lang),
+      startLocale: Locale(Constants.lang),
       saveLocale: true,
       useOnlyLangCode: true,
       assetLoader: const CodegenLoader(),
-      child: const ElmokhtaserApp())
-    );
- 
+      child: const ElmokhtaserApp()));
 }

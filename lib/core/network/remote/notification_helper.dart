@@ -19,7 +19,7 @@ class NotificationHelper {
     }
   }
 
- static AndroidNotificationChannel channel = const AndroidNotificationChannel(
+  static AndroidNotificationChannel channel = const AndroidNotificationChannel(
       'high_importance_channel', 'Hight Importance Notifications',
       description: 'This channel is used for important notifications.',
       importance: Importance.high);
